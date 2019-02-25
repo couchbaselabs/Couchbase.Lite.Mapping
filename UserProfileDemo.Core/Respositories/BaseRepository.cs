@@ -50,12 +50,12 @@ namespace UserProfileDemo.Core.Respositories
         {
             var document = Database.GetDocument(id);
 
-            return document.ToObject<T>();
+            return document?.ToObject<T>();
         }
 
         public virtual void Set(T obj)
         {
-            var document = obj.ToMutableDocument();
+            var document = obj?.ToMutableDocument();
 
             Database.Save(document);
         }
