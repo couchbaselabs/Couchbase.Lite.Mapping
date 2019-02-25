@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using Couchbase.Lite;
+using Couchbase.Lite.Mapping;
 using UserProfileDemo.Core.Models;
 
 namespace UserProfileDemo.Core.Respositories
@@ -49,14 +51,12 @@ namespace UserProfileDemo.Core.Respositories
         public virtual T Get(string id)
         {
             var document = Database.GetDocument(id);
-
             return document?.ToObject<T>();
         }
 
         public virtual void Set(T obj)
         {
-            var document = obj?.ToMutableDocument();
-
+            var document = obj?.ToMutableDocument(obj.Id);
             Database.Save(document);
         }
     }

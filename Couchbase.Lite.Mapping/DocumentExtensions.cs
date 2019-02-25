@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using Couchbase.Lite.Mapping;
@@ -45,9 +46,32 @@ namespace Couchbase.Lite
             return obj;
         }
 
-        public static MutableDocument ToMutableDocument<T>(this T obj) where T : DocumentObject
+        public static MutableDocument ToMutableDocument<T>(this T obj, string id = null) where T : DocumentObject
         {
-            var document = new MutableDocument(obj.Id);
+            MutableDocument document;
+
+            if (id != null)
+            {
+                document = new MutableDocument(obj.Id);
+            }
+            else
+            {
+                document = new MutableDocument();
+            }
+
+            var dictionary = GetDictionary(obj);
+
+            if (dictionary != null)
+            {
+                document.SetData(dictionary);
+            }
+
+            return document;
+        }
+
+        static Dictionary<string, object> GetDictionary(object obj)
+        {
+            var dictionary = new Dictionary<string, object>();
 
             foreach (PropertyInfo propertyInfo in obj.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {
@@ -56,74 +80,44 @@ namespace Couchbase.Lite
 
                 if (propertyValue != null && propertyName.ToLower() != "id")
                 {
-                    AddDocumentValue(ref document, propertyName, propertyValue, propertyInfo.PropertyType);
+                    AddDictionaryValue(ref dictionary, propertyName, propertyValue, propertyInfo.PropertyType);
                 }
             }
 
-            return document;
+            return dictionary;
         }
 
-        static void AddDocumentValue(ref MutableDocument document, string propertyName, object propertyValue, Type propertyType)
+        static void AddDictionaryValue(ref Dictionary<string,object> dictionary, string propertyName, 
+                                            object propertyValue, Type propertyType)
         {
-            try
+            if (propertyType != typeof(decimal) && propertyType != typeof(string) 
+                 && !propertyType.IsEnum && propertyType.IsClass && propertyValue != null)
             {
-                if (propertyType == typeof(int))
+                if (typeof(IEnumerable).IsAssignableFrom(propertyType))
                 {
-                    document.SetInt(propertyName, (int)propertyValue);
-                }
-                else if (propertyType == typeof(Blob))
-                {
-                    document.SetBlob(propertyName, (Blob)propertyValue);
-                }
-                else if (propertyType == typeof(Dictionary<string,object>))
-                {
-                    document.SetData((Dictionary<string, object>)propertyValue);
-                }
-                else if (propertyType == typeof(DictionaryObject))
-                {
-                    document.SetDictionary(propertyName, (DictionaryObject)propertyValue);
-                }
-                else if (propertyType == typeof(DateTime))
-                {
-                    document.SetDate(propertyName, (DateTime)propertyValue);
-                }
-                else if (propertyType == typeof(long))
-                {
-                    document.SetLong(propertyName, (long)propertyValue);
-                }
-                else if (propertyType == typeof(ArrayObject))
-                {
-                    document.SetArray(propertyName, (ArrayObject)propertyValue);
-                }
-                else if (propertyType == typeof(float))
-                {
-                    document.SetFloat(propertyName, (float)propertyValue);
-                }
-                else if (propertyType == typeof(object))
-                {
-                    document.SetValue(propertyName, propertyValue);
-                }
-                else if (propertyType == typeof(double))
-                {
-                    document.SetDouble(propertyName, (double)propertyValue);
-                }
-                else if (propertyType == typeof(string))
-                {
-                    document.SetString(propertyName, propertyValue.ToString());
-                }
-                else if (propertyType == typeof(bool))
-                {
-                    document.SetBoolean(propertyName, (bool)propertyValue);
+                    var items = propertyValue as IEnumerable;
+
+                    var dictionaries = new List<Dictionary<string, object>>();
+
+                    foreach (var item in items)
+                    {
+                        dictionaries.Add(GetDictionary(item));
+                    }
+
+                    dictionary[propertyName] = dictionaries.ToArray();
                 }
                 else
                 {
-                    throw new Exception("Couchbase.Lite.Mapping Exception - Type not supported!");
+                    dictionary[propertyName] = GetDictionary(propertyValue);
                 }
             }
-            catch(Exception ex)
+            else if (propertyType.IsEnum)
             {
-                // TODO: Log?
-                throw ex;
+                dictionary[propertyName] = propertyValue.ToString();
+            }
+            else
+            {
+                dictionary[propertyName] = propertyValue;
             }
         }
     }
