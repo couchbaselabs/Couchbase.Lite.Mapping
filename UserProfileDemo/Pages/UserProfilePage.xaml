@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    x:Class="UserProfileDemo.Pages.UserProfilePage"
+    Title="Your Profile">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" Command="{Binding SaveCommand}" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="RowLabelDescriptor" TargetType="Label">
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid Margin="15,25,15,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+        
+            <Label Grid.Row="0" Grid.Column="0" Text="Name:" Style="{StaticResource RowLabelDescriptor}" />
+            <Entry Grid.Row="0" Grid.Column="1" Text="{Binding UserProfile.Name}" />
+        
+            <Label Grid.Row="1" Grid.Column="0" Text="Email:" Style="{StaticResource RowLabelDescriptor}" />
+            <Entry Grid.Row="1" Grid.Column="1" Text="{Binding UserProfile.Email}" />
+        
+            <Label Grid.Row="2" Grid.Column="0" Text="Address:" Style="{StaticResource RowLabelDescriptor}" />
+            <Entry Grid.Row="2" Grid.Column="1" Text="{Binding UserProfile.Address}" />
+            
+            <Button Grid.Row="3" Grid.ColumnSpan="2" Text="Log out" Command="{Binding LogoutCommand}" 
+                    TextColor="Red" VerticalOptions="End" HorizontalOptions="Center" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
