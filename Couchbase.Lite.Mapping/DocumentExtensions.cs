@@ -135,22 +135,8 @@ namespace Couchbase.Lite
         static void AddDictionaryValue(ref Dictionary<string,object> dictionary, string propertyName, 
                                             object propertyValue, Type propertyType)
         {
-
-            if (propertyType == typeof(byte[]))
+            if (propertyType == typeof(byte[]) || propertyType == typeof(Stream))
             {
-                //var type = MimeType.GetMimeType((byte[])propertyValue);
-
-                //dictionary[propertyName] = new Blob("", (byte[])propertyValue);
-
-                //var intArray = ((byte[])propertyValue).Select(b => (int)b).ToArray();
-                //dictionary[propertyName] = intArray;
-
-                //dynamic obj = JObject.Parse(Encoding.UTF8.GetString((byte[])propertyValue));
-
-                //dictionary[propertyName] = Encoding.UTF8.GetString((byte[])propertyValue);
-
-                //dictionary[propertyName] = (byte[])propertyValue;
-
                 dictionary[propertyName] = new Blob("", (byte[])propertyValue);
             }
             else if (propertyType != typeof(decimal) && propertyType != typeof(string)
