@@ -10,8 +10,8 @@
   <ItemGroup>
     <Folder Include="ViewModels\" />
     <Folder Include="Models\" />
-    <Folder Include="Managers\" />
     <Folder Include="Respositories\" />
+    <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Couchbase.Lite" Version="2.1.2" />

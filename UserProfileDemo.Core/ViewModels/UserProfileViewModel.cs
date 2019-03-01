@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using UserProfileDemo.Core.Models;
 using UserProfileDemo.Core.Respositories;
+using UserProfileDemo.Core.Services;
 
 namespace UserProfileDemo.Core.ViewModels
 {
@@ -10,11 +11,48 @@ namespace UserProfileDemo.Core.ViewModels
     {
         Action LogoutSuccessful { get; set; }
 
-        UserProfile _userProfile;
-        public UserProfile UserProfile
+        string UserProfileId => $"user::{AppInstance.User.Username}";
+
+        string _name;
+        public string Name
         {
-            get => _userProfile;
-            set => SetPropertyChanged(ref _userProfile, value);
+            get => _name;
+            set => SetPropertyChanged(ref _name, value);
+        }
+
+        string _email;
+        public string Email
+        {
+            get => _email;
+            set => SetPropertyChanged(ref _email, value);
+        }
+
+        string _address;
+        public string Address
+        {
+            get => _address;
+            set => SetPropertyChanged(ref _address, value);
+        }
+
+        byte[] _imageData;
+        public byte[] ImageData
+        {
+            get => _imageData;
+            set => SetPropertyChanged(ref _imageData, value);
+        }
+
+        IMediaService _mediaService;
+        IMediaService MediaService
+        {
+            get
+            {
+                if (_mediaService == null)
+                {
+                    _mediaService = ServiceContainer.Resolve<IMediaService>();
+                }
+
+                return _mediaService;
+            }
         }
 
         ICommand _saveCommand;
@@ -28,6 +66,20 @@ namespace UserProfileDemo.Core.ViewModels
                 }
 
                 return _saveCommand;
+            }
+        }
+
+        ICommand _selectImageCommand;
+        public ICommand SelectImageCommand
+        {
+            get
+            {
+                if (_selectImageCommand == null)
+                {
+                    _selectImageCommand = new Command(async () => await SelectImage());
+                }
+
+                return _selectImageCommand;
             }
         }
 
@@ -56,17 +108,15 @@ namespace UserProfileDemo.Core.ViewModels
         {
             IsBusy = true;
 
-            UserProfile = await Task.Run(() =>
+            var userProfile = await Task.Run(() =>
             {
-                var userProfileId = $"user::{AppInstance.User.Username}";
-
-                var up = UserProfileRepository.Instance.GetUserProfile(userProfileId);
+                var up = UserProfileRepository.Instance.GetUserProfile(UserProfileId);
 
                 if (up == null)
                 {
                     up = new UserProfile
                     {
-                        Id = userProfileId,
+                        Id = UserProfileId,
                         Email = AppInstance.User.Username
                     };
                 }
@@ -74,12 +124,39 @@ namespace UserProfileDemo.Core.ViewModels
                 return up;
             });
 
+            if (userProfile != null)
+            {
+                Name = userProfile.Name;
+                Email = userProfile.Email;
+                Address = userProfile.Address;
+                ImageData = userProfile.ImageData;
+            }
+
             IsBusy = false;
         }
 
         void Save()
         {
-            UserProfileRepository.Instance.SaveUserProfile(UserProfile);
+            var userProfile = new UserProfile
+            {
+                Id = UserProfileId,
+                Name = Name,
+                Email = Email,
+                Address = Address,
+                ImageData = ImageData
+            };
+
+            UserProfileRepository.Instance.SaveUserProfile(userProfile);
+        }
+
+        async Task SelectImage()
+        {
+            var imageData = await MediaService.PickPhotoAsync();
+
+            if (imageData != null)
+            {
+                ImageData = imageData;
+            }
         }
 
         void Logout()

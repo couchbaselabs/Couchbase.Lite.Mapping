@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Couchbase.Lite;
 using Couchbase.Lite.Mapping;
+using Newtonsoft.Json;
 using UserProfileDemo.Core.Models;
 
 namespace UserProfileDemo.Core.Respositories
@@ -57,6 +58,22 @@ namespace UserProfileDemo.Core.Respositories
         public virtual void Set(T obj)
         {
             var document = obj?.ToMutableDocument(obj.Id);
+
+            //document.SetBlob("test", new Blob("image/jpeg", new byte[256]));
+
+            /*
+            try
+            {
+                var blob = new Blob("image/jpeg", new byte[256]);
+
+                var json = JsonConvert.SerializeObject(blob);
+            }
+            catch (Exception ex)
+            {
+                string test = "";
+            }*/
+
+
             Database.Save(document);
         }
     }

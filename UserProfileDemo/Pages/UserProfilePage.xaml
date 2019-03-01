@@ -2,6 +2,7 @@
 <ContentPage 
     xmlns="http://xamarin.com/schemas/2014/forms" 
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:converters="clr-namespace:UserProfileDemo.Converters"
     x:Class="UserProfileDemo.Pages.UserProfilePage"
     Title="Your Profile">
     <ContentPage.ToolbarItems>
@@ -9,10 +10,14 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <ResourceDictionary>
+            
             <Style x:Key="RowLabelDescriptor" TargetType="Label">
                 <Setter Property="FontAttributes" Value="Bold" />
                 <Setter Property="HorizontalOptions" Value="Center" />
             </Style>
+            
+            <converters:ByteToImageFieldConverter x:Key="byteToImageSource" />
+            
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
@@ -25,19 +30,26 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
+             
+            <StackLayout Grid.Row="0" Grid.ColumnSpan="2" Spacing="5">
+                 <Image  Source="{Binding ImageData, Converter={StaticResource byteToImageSource}}" 
+                   Aspect="AspectFill" WidthRequest="300" HeightRequest="200" HorizontalOptions="Center" />
+                 <Button Text="Upload Image" Command="{Binding SelectImageCommand}" HorizontalOptions="Center" />
+            </StackLayout>
         
-            <Label Grid.Row="0" Grid.Column="0" Text="Name:" Style="{StaticResource RowLabelDescriptor}" />
-            <Entry Grid.Row="0" Grid.Column="1" Text="{Binding UserProfile.Name}" />
+            <Label Grid.Row="1" Grid.Column="0" Text="Name:" Style="{StaticResource RowLabelDescriptor}" />
+            <Entry Grid.Row="1" Grid.Column="1" Text="{Binding Name}" />
         
-            <Label Grid.Row="1" Grid.Column="0" Text="Email:" Style="{StaticResource RowLabelDescriptor}" />
-            <Entry Grid.Row="1" Grid.Column="1" Text="{Binding UserProfile.Email}" />
+            <Label Grid.Row="2" Grid.Column="0" Text="Email:" Style="{StaticResource RowLabelDescriptor}" />
+            <Entry Grid.Row="2" Grid.Column="1" Text="{Binding Email}" />
         
-            <Label Grid.Row="2" Grid.Column="0" Text="Address:" Style="{StaticResource RowLabelDescriptor}" />
-            <Entry Grid.Row="2" Grid.Column="1" Text="{Binding UserProfile.Address}" />
+            <Label Grid.Row="3" Grid.Column="0" Text="Address:" Style="{StaticResource RowLabelDescriptor}" />
+            <Entry Grid.Row="3" Grid.Column="1" Text="{Binding Address}" />
             
-            <Button Grid.Row="3" Grid.ColumnSpan="2" Text="Log out" Command="{Binding LogoutCommand}" 
+            <Button Grid.Row="4" Grid.ColumnSpan="2" Text="Logout" Command="{Binding LogoutCommand}" 
                     TextColor="Red" VerticalOptions="End" HorizontalOptions="Center" />
         </Grid>
     </ContentPage.Content>
