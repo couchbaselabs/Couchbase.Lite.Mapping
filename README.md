@@ -1,3 +1,5 @@
+**This is an independent, open source project, and is NOT affiliated with or maintained by Couchbase, Inc.**
+
 # Couchbase.Lite.Mapping
 
 Couchbase.Lite.Mapping gives developers the ability to dynamically automatically convert generic objects to and from Couchbase document objects. This drastically reduces the amount of, often repeated, code needed to be written to store and retrieve information to and from Couchbase.Lite databases. 
