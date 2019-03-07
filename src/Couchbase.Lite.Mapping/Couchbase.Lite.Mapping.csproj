@@ -2,19 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <PackOnBuild>true</PackOnBuild>
-    <Authors>Robert Hedgpeth</Authors>
-    <Description>A simple component that extends Couchbase.Lite to provide extension methods for converting an object to a Document/MutableDocument and a Document/MutableDocument to an object.</Description>
-    <PackageId>Couchbase.Lite.Mapping</PackageId>
-    <PackageVersion>1.0.0</PackageVersion>
-    <Owners>Robert Hedgpeth</Owners>
-    <Summary>A simple component that extends Couchbase.Lite to provide extension methods for converting an object to a Document/MutableDocument and a Document/MutableDocument to an object.</Summary>
-    <Title>Couchbase.Lite.Mapping</Title>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Couchbase.Lite" Version="2.1.2" />
-    <PackageReference Include="NuGet.Build.Packaging" Version="0.2.0" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Json" />

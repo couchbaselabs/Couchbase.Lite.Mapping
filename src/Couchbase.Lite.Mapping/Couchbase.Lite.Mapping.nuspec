@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package>
+  <metadata>
+    <id>Couchbase.Lite.Mapping</id>
+    <title>Couchbase Lite Mapping</title>
+    <version>1.0.2</version>
+    <authors>Rob Hedgpeth</authors>
+    <owners>Couchbase Labs</owners>
+    <projectUrl>https://github.com/rhedgpeth/Couchbase.Lite.Mapping</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/couchbase/couchbase-lite-net/master/packaging/nuget/logo.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A simple component that extends Couchbase.Lite to provide extension methods for converting an object to a Document/MutableDocument and a Document/MutableDocument to an object.</description>
+    <copyright>Copyright 2019</copyright>
+    <tags>couchbase couchbase-mobile couchbase-lite sync database mobile netcore xamarin ios android windows linux mac osx nosql</tags>
+    <language>en-US</language>
+    
+    <dependencies>
+      <group targetFramework="netstandard2.0">
+        <dependency id="Couchbase.Lite" version="2.1.2" />
+      </group>
+    </dependencies>
+    
+  </metadata>
+  <files>
+    <file target="lib\netstandard2.0\" src="bin\Release\netstandard2.0\Couchbase.Lite.Mapping.dll" />
+    <file target="lib\netstandard2.0\" src="bin\Release\netstandard2.0\Couchbase.Lite.Mapping.pdb" />
+    <file target="lib\netstandard2.0\" src="bin\Release\netstandard2.0\Couchbase.Lite.Mapping.deps.json" />
+  </files>
+</package>
