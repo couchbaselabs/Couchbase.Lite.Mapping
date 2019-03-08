@@ -9,7 +9,7 @@ Couchbase.Lite.Mapping gives developers the ability to dynamically automatically
 ## Getting started ##
 The Couchbase.Lite.Mapping project has the following dependencies:
 
-- [Couchbase.Lite](https://github.com/couchbase/couchbase-lite-net) (2.x)
+- [Couchbase.Lite](https://github.com/couchbase/couchbase-lite-net) (2.1.2+)
 
 ### Installation
 
