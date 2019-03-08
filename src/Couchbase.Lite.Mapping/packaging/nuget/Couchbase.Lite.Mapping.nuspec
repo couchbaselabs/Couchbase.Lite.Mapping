@@ -7,7 +7,7 @@
     <authors>Rob Hedgpeth</authors>
     <owners>Couchbase Labs</owners>
     <projectUrl>https://github.com/rhedgpeth/Couchbase.Lite.Mapping</projectUrl>
-    <iconUrl>https://raw.githubusercontent.com/rhedgpeth/Couchbase.Lite.Mapping/master/src/Couchbase.Lite.Mapping/packaging/nuget/logo.png</iconUrl>
+    <iconUrl>https://raw.githubusercontent.com/couchbaselabs/Couchbase.Lite.Mapping/master/src/Couchbase.Lite.Mapping/packaging/nuget/logo.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A simple component that extends Couchbase.Lite to provide extension methods for converting an object to a Document/MutableDocument and a Document/MutableDocument to an object.</description>
     <copyright>Copyright 2019</copyright>
