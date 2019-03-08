@@ -1,4 +1,4 @@
-**This is an independent, open source project, and is NOT affiliated with or maintained by Couchbase, Inc.**
+**This is an independent, open source couchbaselabs project, and is NOT officially supported by Couchbase, Inc.**
 
 # Couchbase.Lite.Mapping
 
@@ -17,23 +17,27 @@ Couchbase.Lite.Mapping is available via:
 
 * NuGet Official Releases: [![GitHub release](https://img.shields.io/nuget/v/Couchbase.Lite.Mapping.svg?style=plastic)]()
 
+[Installing](https://docs.microsoft.com/en-us/nuget/consume-packages/ways-to-install-a-package) the NuGet package into your project will automatically install the Couchbase Lite dependency.
+
+### Build
+If you would like to build the package from source instead, follow the steps below
+
+- Clone the repo
+```
+git clone https://github.com/couchbaselabs/Couchbase.Lite.Mapping
+```
+- Build the release version of project using Visual Studio
+- Build the package
+```
+cd /path/to/repo/src/Couchbase.Lite.Mapping/packaging/nuget
+
+nuget pack Couchbase.Lite.Mapping.nuspec
+```
+
 ### Documentation
 
 To get started using [Couchbase.Lite](https://github.com/couchbase/couchbase-lite-net) please refer to the [official documentation](https://developer.couchbase.com/documentation/mobile/2.0/guides/couchbase-lite/index.html).
 
-
-## Quick Start
-
-### Sample App
-
-A sample Xamarin.Forms solution (supporting iOS and Android) can be found within [Samples](https://github.com/couchbaselabs/Couchbase.Lite.Mapping/tree/master/sample/Couchbase.Lite.Mapping.Sample). Simply clone this repo, open [Couchbase.Lite.Mapping.Sample.sln](https://github.com/couchbaselabs/Couchbase.Lite.Mapping/blob/master/sample/Couchbase.Lite.Mapping.Sample/Couchbase.Lite.Mapping.Sample.sln), and build/run the application!
-
-The sample app allows users to log in with any username and password, and maintains a user profile per username. Profiles consist of basic information and an image that are stored in a Couchbase.Lite database for the "logged in" user.
-
-<p>
-  <img src="images/login.png" width="200" title="hover text" style="margin-right:25px;" border="3px">
-  <img src="images/profile.png" width="200" alt="accessibility text" border="5px">
-</p>
 
 ### Basic Usage
 ```csharp
@@ -58,8 +62,23 @@ var mutableDocument = testObject.ToMutableDocument();
 var newTestObject = mutableDocument.ToObject<TestObject>();
 ```
 
+## Testing
+
+### Sample App
+
+A sample Xamarin.Forms solution (supporting iOS and Android) can be found within [Samples](https://github.com/couchbaselabs/Couchbase.Lite.Mapping/tree/master/sample/Couchbase.Lite.Mapping.Sample). Simply clone this repo, open [Couchbase.Lite.Mapping.Sample.sln](https://github.com/couchbaselabs/Couchbase.Lite.Mapping/blob/master/sample/Couchbase.Lite.Mapping.Sample/Couchbase.Lite.Mapping.Sample.sln), and build/run the application!
+
+The sample app allows users to log in with _any_ username and password, and maintains a user profile per username. Profiles consist of basic information and an image that is persisted as a user profile Document in the Couchbase.Lite database for a "logged in" user.
+
+<p>
+  <img src="images/login.png" width="200" title="hover text" style="margin-right:25px;" border="3px">
+  <img src="images/profile.png" width="200" alt="accessibility text" border="5px">
+</p>
+
 ## Contributors ##
-Couchbase.Lite.Mapping is an open source project and community contributions are welcome whether they be pull-requests, feedback or filing bug tickets or feature requests. **Please include appropriate unit tests with pull-requests.**
+Couchbase.Lite.Mapping is an open source project and community contributions are welcome whether they be pull-requests, feedback or filing bug tickets or feature requests.
+
+**Please include appropriate unit tests with pull-requests.**
 
 We appreciate any contribution no matter how big or small!
 
