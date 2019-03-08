@@ -51,10 +51,10 @@ var testObject = new TestObject
     Value2 = "Rocks!"
 };
 
-// Convert the object into a Couchbase MutableDocument
+// Convert the object into a Couchbase.Lite MutableDocument
 var mutableDocument = testObject.ToMutableDocument();
 
-// Convert a Couchbase MutableDocument into an object (of a type speficied via generic)
+// Convert a Couchbase.Lite MutableDocument into an object (of a type specified via generic)
 var newTestObject = mutableDocument.ToObject<TestObject>();
 ```
 
