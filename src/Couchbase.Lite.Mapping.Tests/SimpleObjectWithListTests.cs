@@ -2,14 +2,15 @@
 
 namespace Couchbase.Lite.Mapping.Tests
 {
-    public class SimpleObjectTest
+    public class SimpleObjectWithListTests
     {
         [Fact]
         public void TestToMutableDocument()
         {
-            var simpleObject = new TestObjects.SimpleObject
+            var simpleObject = new TestObjects.SimpleObjectWithArray
             {
-                StringValue = "Test Value"
+                StringValue = "Test Value",
+                ArrayValue = new string[] { "Value 1", "Value 2" }
             };
 
             var mutableDocument = simpleObject.ToMutableDocument();
