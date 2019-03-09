@@ -6,13 +6,14 @@
     <version>1.0.0</version>
     <authors>Rob Hedgpeth</authors>
     <owners>Couchbase Labs</owners>
-    <projectUrl>https://github.com/rhedgpeth/Couchbase.Lite.Mapping</projectUrl>
+    <projectUrl>https://github.com/couchbaselabs/Couchbase.Lite.Mapping</projectUrl>
     <iconUrl>https://raw.githubusercontent.com/couchbaselabs/Couchbase.Lite.Mapping/master/src/Couchbase.Lite.Mapping/packaging/nuget/logo.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A simple component that extends Couchbase.Lite to provide extension methods for converting an object to a Document/MutableDocument and a Document/MutableDocument to an object. This package is not officially supported by Couchbase Inc.</description>
     <copyright>Copyright 2019</copyright>
     <tags>couchbase couchbase-mobile couchbase-lite sync database mobile netcore xamarin ios android windows linux mac osx nosql</tags>
     <language>en-US</language>
+    <license type="expression">Apache-2.0</license>
     
     <dependencies>
       <group targetFramework="netstandard2.0">
