@@ -15,7 +15,7 @@ The Couchbase.Lite.Mapping project has the following dependencies:
 
 Couchbase.Lite.Mapping is available via:
 
-* NuGet Official Releases: [![GitHub release](https://img.shields.io/nuget/v/Couchbase.Lite.Mapping.svg?style=plastic)]()
+* NuGet Official Releases: [![GitHub release](https://img.shields.io/nuget/v/Couchbase.Lite.Mapping.svg?style=plastic)](https://www.nuget.org/packages/Couchbase.Lite.Mapping)
 
 [Installing](https://docs.microsoft.com/en-us/nuget/consume-packages/ways-to-install-a-package) the NuGet package into your project will automatically install the Couchbase Lite dependency.
 
