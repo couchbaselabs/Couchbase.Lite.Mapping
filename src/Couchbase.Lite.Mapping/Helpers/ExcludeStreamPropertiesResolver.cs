@@ -12,7 +12,7 @@ namespace Couchbase.Lite
         protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
         {
             var props = base.CreateProperties(type, memberSerialization);
-            return props.Where(p => p.PropertyType != typeof(Stream)).ToList();
+            return props?.Where(p => p.PropertyType != typeof(Stream))?.ToList();
         }
     }
 }

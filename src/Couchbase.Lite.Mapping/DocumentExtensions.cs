@@ -23,17 +23,25 @@ namespace Couchbase.Lite
 
                         settings.Converters.Add(new BlobToBytesJsonConverter());
 
-                        var json = JsonConvert.SerializeObject(document.ToMutable().ToDictionary(), settings);
+                        var dictionary = document.ToMutable()?.ToDictionary();
 
-                        var jObj = JObject.Parse(json);
+                        if (dictionary != null)
+                        {
+                            var json = JsonConvert.SerializeObject(dictionary, settings);
 
-                        if (jObj != null)
-                        {
-                            obj = jObj.ToObject<T>();
-                        }
-                        else
-                        {
-                            obj = Activator.CreateInstance<T>();
+                            if (!string.IsNullOrEmpty(json))
+                            {
+                                var jObj = JObject.Parse(json);
+
+                                if (jObj != null)
+                                {
+                                    obj = jObj.ToObject<T>();
+                                }
+                                else
+                                {
+                                    obj = Activator.CreateInstance<T>();
+                                } 
+                            }
                         }
                     }
                     else
