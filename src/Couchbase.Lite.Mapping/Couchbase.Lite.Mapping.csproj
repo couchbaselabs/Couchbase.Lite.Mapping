@@ -5,12 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Couchbase.Lite" Version="2.1.2" />
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="System.Json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Helpers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Couchbase.Lite" Version="2.1.2" />
   </ItemGroup>
 </Project>

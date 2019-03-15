@@ -10,14 +10,11 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
     <PackageReference Include="xunit" Version="2.4.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
-    <PackageReference Include="Couchbase.Lite" Version="2.1.2" />
+    <PackageReference Include="Couchbase.Lite.Enterprise" Version="2.1.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Couchbase.Lite.Mapping\Couchbase.Lite.Mapping.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="MockedLiteCore.cs" />
   </ItemGroup>
   <Import Project="..\Couchbase.Lite.Mapping.Shared.Tests\Couchbase.Lite.Mapping.Shared.Tests.projitems" Label="Shared" Condition="Exists('..\Couchbase.Lite.Mapping.Shared.Tests\Couchbase.Lite.Mapping.Shared.Tests.projitems')" />
 </Project>

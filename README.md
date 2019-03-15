@@ -2,18 +2,20 @@
 
 # Couchbase.Lite.Mapping
 
-Couchbase.Lite.Mapping gives developers the ability to dynamically automatically convert generic objects to and from Couchbase document objects. This drastically reduces the amount of, often repeated, code needed to be written to store and retrieve information to and from Couchbase.Lite databases.
+`Couchbase.Lite.Mapping` gives developers the ability to dynamically automatically convert generic objects to and from Couchbase document objects. This drastically reduces the amount of, often repeated, code needed to be written to store and retrieve information to and from Couchbase Lite databases.
 
 [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/couchbaselabs/Couchbase.Lite.Mapping)
 
 ## Getting started ##
-The Couchbase.Lite.Mapping project has the following dependencies:
+The `Couchbase.Lite.Mapping` project has the following dependencies:
 
 - [Couchbase.Lite](https://github.com/couchbase/couchbase-lite-net) (2.1.2+)
 
 ### Installation
 
-Couchbase.Lite.Mapping is available via:
+**NOTE:** As of version 1.0.2, in order to use `Couchbase.Lite.Mapping` you must have either the [Couchbase.Lite](https://www.nuget.org/packages/Couchbase.Lite/) or [Couchbase.Lite.Enterprise](https://www.nuget.org/packages/Couchbase.Lite/) package installed. `Couchbase.Lite.Mapping` does **not** include dependencies so that it can work for both `Couchbase.Lite` and `Couchbase.Lite.Enterprise`.
+
+`Couchbase.Lite.Mapping` is available via:
 
 * NuGet Official Releases: [![GitHub release](https://img.shields.io/nuget/v/Couchbase.Lite.Mapping.svg?style=plastic)](https://www.nuget.org/packages/Couchbase.Lite.Mapping)
 
@@ -36,7 +38,7 @@ nuget pack Couchbase.Lite.Mapping.nuspec
 
 ### Documentation
 
-To get started using [Couchbase.Lite](https://github.com/couchbase/couchbase-lite-net) please refer to the [official documentation](https://developer.couchbase.com/documentation/mobile/2.0/guides/couchbase-lite/index.html).
+To get started using [Couchbase.Lite](https://github.com/couchbase/couchbase-lite-net) or [Couchbase.Lite.Enterprise](https://www.nuget.org/packages/Couchbase.Lite.Enterprise/) please refer to the [official documentation](https://developer.couchbase.com/documentation/mobile/2.0/guides/couchbase-lite/index.html).
 
 
 ### Basic Usage
@@ -68,7 +70,7 @@ var newTestObject = mutableDocument.ToObject<TestObject>();
 
 A sample Xamarin.Forms solution (supporting iOS and Android) can be found within [Samples](https://github.com/couchbaselabs/Couchbase.Lite.Mapping/tree/master/sample/Couchbase.Lite.Mapping.Sample). Simply clone this repo, open [Couchbase.Lite.Mapping.Sample.sln](https://github.com/couchbaselabs/Couchbase.Lite.Mapping/blob/master/sample/Couchbase.Lite.Mapping.Sample/Couchbase.Lite.Mapping.Sample.sln), and build/run the application!
 
-The sample app allows users to log in with _any_ username and password, and maintains a user profile per username. Profiles consist of basic information and an image that is persisted as a user profile Document in the Couchbase.Lite database for a "logged in" user.
+The sample app allows users to log in with _any_ username and password, and maintains a user profile per username. Profiles consist of basic information and an image that is persisted as a user profile Document in the Couchbase Lite database for a "logged in" user.
 
 <p>
   <img src="images/login.png" width="200" title="hover text" style="margin-right:25px;" border="3px">
@@ -82,4 +84,8 @@ Couchbase.Lite.Mapping is an open source project and community contributions are
 
 We appreciate any contribution no matter how big or small!
 
+
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=plastic)](https://opensource.org/licenses/Apache-2.0)
+ 
+(**Note:** Use of `Couchbase.Lite.Mapping` has no implications on the `Couchbase.Lite.Enterprise` license agreement.)
+
