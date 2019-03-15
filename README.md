@@ -6,12 +6,7 @@
 
 [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/couchbaselabs/Couchbase.Lite.Mapping)
 
-## Getting started ##
-The `Couchbase.Lite.Mapping` project has the following dependencies:
-
-- [Couchbase.Lite](https://github.com/couchbase/couchbase-lite-net) (2.1.2+)
-
-### Installation
+### Getting Started
 
 **NOTE:** As of version 1.0.2, in order to use `Couchbase.Lite.Mapping` you must have either the [Couchbase.Lite](https://www.nuget.org/packages/Couchbase.Lite/) or [Couchbase.Lite.Enterprise](https://www.nuget.org/packages/Couchbase.Lite/) package installed. `Couchbase.Lite.Mapping` does **not** include dependencies so that it can work for both `Couchbase.Lite` and `Couchbase.Lite.Enterprise`.
 
