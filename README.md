@@ -8,13 +8,14 @@
 
 ### Getting Started
 
-**NOTE:** As of version 1.0.2, in order to use `Couchbase.Lite.Mapping` you must have either the [Couchbase.Lite](https://www.nuget.org/packages/Couchbase.Lite/) or [Couchbase.Lite.Enterprise](https://www.nuget.org/packages/Couchbase.Lite/) package installed. `Couchbase.Lite.Mapping` does **not** include dependencies so that it can work for both `Couchbase.Lite` and `Couchbase.Lite.Enterprise`.
+**NOTE:**
+As of version 1.0.2, in order to use `Couchbase.Lite.Mapping` you must have either the [Couchbase.Lite](https://www.nuget.org/packages/Couchbase.Lite/) or [Couchbase.Lite.Enterprise](https://www.nuget.org/packages/Couchbase.Lite/) package installed.
+
+`Couchbase.Lite.Mapping` does **not** include dependencies so that it can work with both `Couchbase.Lite` and `Couchbase.Lite.Enterprise`. This also provides the flexibility to install any compatible version of Couchbase.lite.
 
 `Couchbase.Lite.Mapping` is available via:
-
 * NuGet Official Releases: [![GitHub release](https://img.shields.io/nuget/v/Couchbase.Lite.Mapping.svg?style=plastic)](https://www.nuget.org/packages/Couchbase.Lite.Mapping)
 
-[Installing](https://docs.microsoft.com/en-us/nuget/consume-packages/ways-to-install-a-package) the NuGet package into your project will automatically install the Couchbase Lite dependency.
 
 ### Build
 If you would like to build the package from source instead, follow the steps below
@@ -79,8 +80,9 @@ Couchbase.Lite.Mapping is an open source project and community contributions are
 
 We appreciate any contribution no matter how big or small!
 
-
+## Licenses ##
+The mapping package is available under
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=plastic)](https://opensource.org/licenses/Apache-2.0)
  
-(**Note:** Use of `Couchbase.Lite.Mapping` has no implications on the `Couchbase.Lite.Enterprise` license agreement.)
-
+**Note:**: 
+Use of `Couchbase.Lite.Mapping` has no implications on the `Couchbase.Lite.Enterprise` or `Couchbase.Lite` licenses. Those packages are governed by the terms of the Couchbase Enterprise Edition and Community Edition licenses respectively
