@@ -1,4 +1,5 @@
 ﻿using System;
+using Couchbase.Lite.Mapping;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 

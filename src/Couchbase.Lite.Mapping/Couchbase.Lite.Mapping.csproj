@@ -8,7 +8,9 @@
     <Reference Include="System.Json" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Helpers\" />
+    <Folder Include="Attributes\" />
+    <Folder Include="Converters\" />
+    <Folder Include="Resolvers\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Couchbase.Lite" Version="2.1.2" />

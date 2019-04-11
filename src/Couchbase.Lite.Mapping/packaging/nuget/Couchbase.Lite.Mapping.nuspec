@@ -3,7 +3,7 @@
   <metadata>
     <id>Couchbase.Lite.Mapping</id>
     <title>Couchbase Lite Mapping</title>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <authors>Rob Hedgpeth</authors>
     <owners>Couchbase Labs</owners>
     <projectUrl>https://github.com/couchbaselabs/Couchbase.Lite.Mapping</projectUrl>

@@ -2,13 +2,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
+using Couchbase.Lite.Mapping;
 
 namespace Couchbase.Lite
 {
     public static class ObjectExtensions
     {
-        public static MutableDocument ToMutableDocument<T>(this T obj, string id = null)
+        public static MutableDocument ToMutableDocument<T>(this T obj,
+                                                           IPropertyNameConverter propertyNameConverter)
+        {
+            return ToMutableDocument(obj, null, propertyNameConverter);
+        }
+
+        public static MutableDocument ToMutableDocument<T>(this T obj, 
+                                                           string id = null, 
+                                                           IPropertyNameConverter propertyNameConverter = null)
         {
             MutableDocument document;
 
@@ -21,7 +31,7 @@ namespace Couchbase.Lite
                 document = new MutableDocument();
             }
 
-            var dictionary = GetDictionary(obj);
+            var dictionary = GetDictionary(obj, propertyNameConverter);
 
             if (dictionary != null)
             {
@@ -31,27 +41,45 @@ namespace Couchbase.Lite
             return document;
         }
 
-        static Dictionary<string, object> GetDictionary(object obj)
+        static Dictionary<string, object> GetDictionary(object obj, IPropertyNameConverter propertyNameConverter = null)
         {
             var dictionary = new Dictionary<string, object>();
 
             foreach (PropertyInfo propertyInfo in obj.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {
-                var propertyName = propertyInfo.Name;
+                string propertyName;
+
                 var propertyValue = propertyInfo.GetValue(obj);
                 var propertyType = propertyInfo.PropertyType;
 
                 if (!propertyValue.IsNullOrDefault(propertyType))
                 {
-                    AddDictionaryValue(ref dictionary, propertyName, propertyValue, propertyInfo.PropertyType);
+                    if (propertyInfo.CustomAttributes?.Count() > 0 && 
+                        propertyInfo.GetCustomAttribute(typeof(MappingPropertyName)) is MappingPropertyName mappingProperty)
+                    {
+                        propertyName = mappingProperty.Name;
+                    }
+                    else if (propertyNameConverter != null)
+                    {
+                        propertyName = propertyNameConverter.Convert(propertyInfo.Name);
+                    }
+                    else
+                    {
+                        propertyName = Settings.PropertyNameConverter.Convert(propertyInfo.Name);
+                    }
+
+                    AddDictionaryValue(ref dictionary, propertyName, propertyValue, propertyInfo.PropertyType, propertyNameConverter);
                 };
             }
 
             return dictionary;
         }
 
-        static void AddDictionaryValue(ref Dictionary<string, object> dictionary, string propertyName,
-                                            object propertyValue, Type propertyType)
+        static void AddDictionaryValue(ref Dictionary<string, object> dictionary, 
+                                       string propertyName,
+                                       object propertyValue, 
+                                       Type propertyType,
+                                       IPropertyNameConverter propertyNameConverter = null)
         {
             if (propertyType == typeof(byte[]) || propertyType == typeof(Stream))
             {
@@ -75,7 +103,7 @@ namespace Couchbase.Lite
 
                         foreach (var item in items)
                         {
-                            dictionaries.Add(GetDictionary(item));
+                            dictionaries.Add(GetDictionary(item, propertyNameConverter));
                         }
 
                         dictionary[propertyName] = dictionaries.ToArray();
@@ -83,7 +111,7 @@ namespace Couchbase.Lite
                 }
                 else
                 {
-                    dictionary[propertyName] = GetDictionary(propertyValue);
+                    dictionary[propertyName] = GetDictionary(propertyValue, propertyNameConverter);
                 }
             }
             else if (propertyType.IsEnum)

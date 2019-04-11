@@ -64,6 +64,56 @@ var mutableDocument = testObject.ToMutableDocument();
 var newTestObject = mutableDocument.ToObject<TestObject>();
 ```
 
+
+### Customizing Property Name Serialization
+
+The default serialization for object property names into Couchbase Lite databases uses **Lower Camel Case** (e.g. lowerCamelCase).
+
+#### Globally
+You can override the default implementation of `IPropertyNameConverter` by setting `Couchbase.Lite.Mapping.Setting.PropertyNameConverter`.
+
+```csharp
+using Couchbase.Lite.Mapping;
+...
+
+// Set this value to override the default IPropertyNameConverter
+Settings.PropertyNameConverter = new CustomPropertyNameConverter();
+
+// Here's an example of a custom implementation of IPropertyNameConverter
+public class CustomPropertyNameConverter : IPropertyNameConverter
+{
+    public string Convert(string val)
+    {
+      return val.ToUpper();
+    }
+}
+```
+
+#### By Document
+
+You can override the default implementation of `IPropertyNameConverter` at the document level by passing in an instance of a class that implements `IPropertyNameConverter` into the `ToMutableDocument` extension method.
+
+```csharp
+var mutableDocument = testObject.ToMutableDocument(new CustomerPropertyName());
+```
+
+#### By Property
+
+You can override the default implementation of `IPropertyNameConverter` at the property level by adding a `MappingPropertyName` attribute above a property.
+
+```csharp
+using Couchbase.Lite.Mapping;
+
+public class TestObject
+{
+    [MappingPropertyName("vALue1")]
+    public string Value1 { get; set; }
+
+    // This property will be converted using the default converter
+    public string Value2 { get; set; }
+}
+```
+
 ## Testing
 
 ### Sample App

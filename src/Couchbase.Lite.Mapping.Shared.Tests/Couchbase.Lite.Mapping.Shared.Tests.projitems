@@ -18,6 +18,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)SimpleObjectTests.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
     <Compile Include="$(MSBuildThisFileDirectory)SimpleObjectWithArrayTests.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
     <Compile Include="$(MSBuildThisFileDirectory)SimpleObjectWithListTests.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
+    <Compile Include="$(MSBuildThisFileDirectory)TestObjects\PropertyNameTestObject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PropertyNameConversionTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)TestObjects\" />
