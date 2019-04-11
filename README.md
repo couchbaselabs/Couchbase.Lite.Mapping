@@ -96,9 +96,9 @@ Settings.PropertyNameConverter = new CustomPropertyNameConverter();
 // Here's an example of a custom implementation of IPropertyNameConverter
 public class CustomPropertyNameConverter : IPropertyNameConverter
 {
-    public string Convert(string val)
+    public string Convert(string propertyName)
     {
-      return val.ToUpper();
+      return propertyName.ToUpper();
     }
 }
 ```
@@ -133,7 +133,7 @@ public class Person
     public string FirstName { get; set; }
 
     // This property will be converted using the default converter
-    public string Value2 { get; set; }
+    public string LastName { get; set; }
 }
 ```
 
