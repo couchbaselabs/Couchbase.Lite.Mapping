@@ -127,7 +127,7 @@ You can override the default implementation of `IPropertyNameConverter` at the p
 ```csharp
 using Couchbase.Lite.Mapping;
 
-public class TestObject
+public class Person
 {
     [MappingPropertyName("fIRStNaME")]
     public string FirstName { get; set; }
