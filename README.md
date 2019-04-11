@@ -40,30 +40,48 @@ To get started using [Couchbase.Lite](https://github.com/couchbase/couchbase-lit
 ### Basic Usage
 ```csharp
 // An object to be converted to a document
-public class TestObject
+public class Person
 {
-    public string Value1 { get; set; }
-    public string Value2 { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
 }
 
 // Create an instance of the object
-var testObject = new TestObject
+var person = new Person
 {
-    Value1 = "Couchbase",
-    Value2 = "Rocks!"
+    FirstName = "Clark",
+    LastName = "Kent"
 };
 
 // Convert the object into a Couchbase.Lite MutableDocument
-var mutableDocument = testObject.ToMutableDocument();
+var mutableDocument = person.ToMutableDocument();
 
 // Convert a Couchbase.Lite MutableDocument into an object (of a type specified via generic)
-var newTestObject = mutableDocument.ToObject<TestObject>();
+var newPerson = mutableDocument.ToObject<Person>();
 ```
 
 
 ### Customizing Property Name Serialization
 
 The default serialization for object property names into Couchbase Lite databases uses **Lower Camel Case** (e.g. lowerCamelCase).
+
+By default the following object
+```csharp
+var person = new Person
+{
+    FirstName = "Bruce",
+    LastName = "Wayne"
+};
+```
+will look like the following in JSON.
+
+```json
+{
+    "firstName": "Bruce",
+    "lastName": "Wayne"
+}
+```
+*Note the casing of `firstName` and `lastName`.*
 
 #### Globally
 You can override the default implementation of `IPropertyNameConverter` by setting `Couchbase.Lite.Mapping.Setting.PropertyNameConverter`.
@@ -85,6 +103,15 @@ public class CustomPropertyNameConverter : IPropertyNameConverter
 }
 ```
 
+Using `CustomerPropertyNameConverter` will yield the following JSON seralization for `Person`.
+
+```json
+{
+    "FIRSTNAME": "Bruce",
+    "LASTNAME": "Wayne"
+}
+```
+
 #### By Document
 
 You can override the default implementation of `IPropertyNameConverter` at the document level by passing in an instance of a class that implements `IPropertyNameConverter` into the `ToMutableDocument` extension method.
@@ -102,11 +129,20 @@ using Couchbase.Lite.Mapping;
 
 public class TestObject
 {
-    [MappingPropertyName("vALue1")]
-    public string Value1 { get; set; }
+    [MappingPropertyName("fIRStNaME")]
+    public string FirstName { get; set; }
 
     // This property will be converted using the default converter
     public string Value2 { get; set; }
+}
+```
+
+Using `MappingPropertyName` (like above) will yield the following JSON seralization for `Person`.
+
+```json
+{
+    "fIRStNaME": "Diana",
+    "lastName": "Prince"
 }
 ```
 
