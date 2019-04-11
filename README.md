@@ -90,7 +90,7 @@ public class CustomPropertyNameConverter : IPropertyNameConverter
 You can override the default implementation of `IPropertyNameConverter` at the document level by passing in an instance of a class that implements `IPropertyNameConverter` into the `ToMutableDocument` extension method.
 
 ```csharp
-var mutableDocument = testObject.ToMutableDocument(new CustomPropertyName());
+var mutableDocument = testObject.ToMutableDocument(new CustomPropertyNameConverter());
 ```
 
 #### By Property
