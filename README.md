@@ -87,6 +87,7 @@ if (results?.Count > 0)
 
     foreach (var result in results)
     {
+        // Where 'people' is the containing Dictionary key
         var dictionary = result.GetDictionary("people");
 
         if (dictionary != null)
@@ -110,7 +111,7 @@ var query = QueryBuilder.Select(SelectResult.All())
 
 var results = query?.Execute()?.AllResults();
 
-// Where 'people' is the containing Dictionary key 
+// Where 'people' is the containing Dictionary key (see in default approach above)
 var personList = results?.ToObjects<Person>("people"); 
 
 ```
