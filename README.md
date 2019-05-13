@@ -72,19 +72,46 @@ var newPerson = mutableDocument.ToObject<Person>();
 ```
 
 ### Basic Usage: IResultSet to IEnumerable of Object <a name="basicusage2"></a>
-```csharp
-Database database;
-IExpression whereQueryExpression;
-...
 
+#### Default (old) approach
+```csharp
+var query = QueryBuilder.Select(SelectResult.All()) 
+                                        .From(DataSource.Database(database)) 
+                                        .Where(whereQueryExpression); 
+                                        
+var results = query?.Execute()?.AllResults();
+
+if (results?.Count > 0)
+{
+    personList = new List<Person>();
+
+    foreach (var result in results)
+    {
+        var dictionary = result.GetDictionary("people");
+
+        if (dictionary != null)
+        {
+            var person = new Person
+            {
+                FirstName = dictionary.GetString("firstName"), 
+                LastName = dictionary.GetString("lastName") 
+            };
+
+            personList.Add(person);
+        }
+    }
+}
+```
+#### Couchbase.Lite.Mapping approach
+```csharp
 var query = QueryBuilder.Select(SelectResult.All()) 
                                         .From(DataSource.Database(database)) 
                                         .Where(whereQueryExpression); 
 
-var peopleResults = query?.Execute()?.AllResults();
+var results = query?.Execute()?.AllResults();
 
 // Where 'people' is the containing Dictionary key 
-var peopleObjects = peopleResults?.ToObjects<Person>("people"); 
+var personList = results?.ToObjects<Person>("people"); 
 
 ```
 
