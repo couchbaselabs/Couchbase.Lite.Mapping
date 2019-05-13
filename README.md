@@ -2,7 +2,7 @@
 
 # Couchbase.Lite.Mapping
 
-`Couchbase.Lite.Mapping` gives developers the ability to dynamically automatically convert generic objects to and from Couchbase document objects. This drastically reduces the amount of, often repeated, code needed to be written to store and retrieve information to and from Couchbase Lite databases.
+`Couchbase.Lite.Mapping` gives developers the ability to dynamically automatically convert generic objects to/from Couchbase `Document` objects and lists of `Result` objects. This drastically reduces the amount of, often repeated, code needed to be written to store and retrieve information to and from Couchbase Lite databases.
 
 [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/couchbaselabs/Couchbase.Lite.Mapping)
 
@@ -37,7 +37,7 @@ nuget pack Couchbase.Lite.Mapping.nuspec
 To get started using [Couchbase.Lite](https://github.com/couchbase/couchbase-lite-net) or [Couchbase.Lite.Enterprise](https://www.nuget.org/packages/Couchbase.Lite.Enterprise/) please refer to the [official documentation](https://developer.couchbase.com/documentation/mobile/2.0/guides/couchbase-lite/index.html).
 
 
-### Basic Usage
+### Basic Usage: Object/`Document`
 ```csharp
 // An object to be converted to a document
 public class Person
@@ -60,6 +60,22 @@ var mutableDocument = person.ToMutableDocument();
 var newPerson = mutableDocument.ToObject<Person>();
 ```
 
+### Basic Usage: `IResultSet` to `IEnumerable<Object>`
+```csharp
+Database database;
+IExpression whereQueryExpression;
+...
+
+var query = QueryBuilder.Select(SelectResult.All()) 
+                                        .From(DataSource.Database(database)) 
+                                        .Where(whereQueryExpression); 
+
+var peopleResults = query?.Execute()?.AllResults();
+
+// Where 'people' is the containing Dictionary key 
+var peopleObjects = peopleResults?.ToObjects<Person>("people"); 
+
+```
 
 ### Customizing Property Name Serialization
 
