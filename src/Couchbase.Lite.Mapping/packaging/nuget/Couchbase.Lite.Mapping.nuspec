@@ -3,7 +3,7 @@
   <metadata>
     <id>Couchbase.Lite.Mapping</id>
     <title>Couchbase Lite Mapping</title>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
     <authors>Rob Hedgpeth</authors>
     <owners>Couchbase Labs</owners>
     <projectUrl>https://github.com/couchbaselabs/Couchbase.Lite.Mapping</projectUrl>
@@ -14,7 +14,7 @@
     <tags>couchbase couchbase-mobile couchbase-lite sync database mobile netcore xamarin ios android windows linux mac osx nosql</tags>
     <language>en-US</language>
     <license type="expression">Apache-2.0</license>
-    <releaseNotes>Removed the dependency on Couchbase.Lite so Couchbase.Lite.Mapping can be used with Couchbase.Lite.Enterprise as well.</releaseNotes>
+    <releaseNotes>Added support for Result collection to Object collection conversion.</releaseNotes>
   </metadata>
   <files>
     <file target="lib\netstandard2.0\" src="..\..\bin\Release\netstandard2.0\Couchbase.Lite.Mapping.dll" />
