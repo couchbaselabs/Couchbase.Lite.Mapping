@@ -6,7 +6,18 @@
 
 [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/couchbaselabs/Couchbase.Lite.Mapping)
 
-### Getting Started
+# Table of Contents
+1. [Getting Started](#gettingstarted)
+2. [Building the Project (optional)](#build)
+3. [Basic Usage: Object/Document](#basicusage1)
+4. [Basic Usage: IResultSet to IEnumerable of Object](#basicusage2)
+5. [Customizing Property Name Serialization](#custom-property-serialization)
+    1. [Globally](#custom-property-serialization-global)
+    2. [By Document](#custom-property-serialization-document)
+    3. [By Property](#custom-property-serialization-property)
+6. [Testing](#testing)
+
+### Getting Started <a name="gettingstarted"></a>
 
 **NOTE:**
 As of version 1.0.2, in order to use `Couchbase.Lite.Mapping` you must have either the [Couchbase.Lite](https://www.nuget.org/packages/Couchbase.Lite/) or [Couchbase.Lite.Enterprise](https://www.nuget.org/packages/Couchbase.Lite/) package installed.
@@ -17,7 +28,7 @@ As of version 1.0.2, in order to use `Couchbase.Lite.Mapping` you must have eith
 * NuGet Official Releases: [![GitHub release](https://img.shields.io/nuget/v/Couchbase.Lite.Mapping.svg?style=plastic)](https://www.nuget.org/packages/Couchbase.Lite.Mapping)
 
 
-### Build
+### Build (optional) <a name="build"></a>
 If you would like to build the package from source instead, follow the steps below
 
 - Clone the repo
@@ -32,12 +43,12 @@ cd /path/to/repo/src/Couchbase.Lite.Mapping/packaging/nuget
 nuget pack Couchbase.Lite.Mapping.nuspec
 ```
 
-### Documentation
+### Documentation <a name="documentation"></a>
 
 To get started using [Couchbase.Lite](https://github.com/couchbase/couchbase-lite-net) or [Couchbase.Lite.Enterprise](https://www.nuget.org/packages/Couchbase.Lite.Enterprise/) please refer to the [official documentation](https://developer.couchbase.com/documentation/mobile/2.0/guides/couchbase-lite/index.html).
 
 
-### Basic Usage: Object/`Document`
+### Basic Usage: Object/Document <a name="basicusage1"></a>
 ```csharp
 // An object to be converted to a document
 public class Person
@@ -60,7 +71,7 @@ var mutableDocument = person.ToMutableDocument();
 var newPerson = mutableDocument.ToObject<Person>();
 ```
 
-### Basic Usage: `IResultSet` to `IEnumerable<Object>`
+### Basic Usage: IResultSet to IEnumerable of Object <a name="basicusage2"></a>
 ```csharp
 Database database;
 IExpression whereQueryExpression;
@@ -77,7 +88,7 @@ var peopleObjects = peopleResults?.ToObjects<Person>("people");
 
 ```
 
-### Customizing Property Name Serialization
+### Customizing Property Name Serialization <a name="custom-property-serialization"></a>
 
 The default serialization for object property names into Couchbase Lite databases uses **Lower Camel Case** (e.g. lowerCamelCase).
 
@@ -99,7 +110,7 @@ will look like the following in JSON.
 ```
 *Note the casing of `firstName` and `lastName`.*
 
-#### Globally
+#### Globally <a name="custom-property-serialization-global"></a>
 You can override the default implementation of `IPropertyNameConverter` by setting `Couchbase.Lite.Mapping.Setting.PropertyNameConverter`.
 
 ```csharp
@@ -128,7 +139,7 @@ Using `CustomerPropertyNameConverter` will yield the following JSON seralization
 }
 ```
 
-#### By Document
+#### By Document <a name="custom-property-serialization-document"></a>
 
 You can override the default implementation of `IPropertyNameConverter` at the document level by passing in an instance of a class that implements `IPropertyNameConverter` into the `ToMutableDocument` extension method.
 
@@ -136,7 +147,7 @@ You can override the default implementation of `IPropertyNameConverter` at the d
 var mutableDocument = testObject.ToMutableDocument(new CustomPropertyNameConverter());
 ```
 
-#### By Property
+#### By Property <a name="custom-property-serialization-property"></a>
 
 You can override the default implementation of `IPropertyNameConverter` at the property level by adding a `MappingPropertyName` attribute above a property.
 
@@ -162,9 +173,9 @@ Using `MappingPropertyName` (like above) will yield the following JSON seralizat
 }
 ```
 
-## Testing
+## Testing <a name="testing"></a>
 
-### Sample App
+### Sample App 
 
 A sample Xamarin.Forms solution (supporting iOS and Android) can be found within [Samples](https://github.com/couchbaselabs/Couchbase.Lite.Mapping/tree/master/sample/Couchbase.Lite.Mapping.Sample). Simply clone this repo, open [Couchbase.Lite.Mapping.Sample.sln](https://github.com/couchbaselabs/Couchbase.Lite.Mapping/blob/master/sample/Couchbase.Lite.Mapping.Sample/Couchbase.Lite.Mapping.Sample.sln), and build/run the application!
 
