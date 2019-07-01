@@ -23,6 +23,7 @@ namespace Couchbase.Lite
                         };
 
                         settings.Converters.Add(new BlobToBytesJsonConverter());
+                        settings.Converters.Add(new DateTimeOffsetToDateTimeJsonConverter());
 
                         var dictionary = document.ToMutable()?.ToDictionary();
 

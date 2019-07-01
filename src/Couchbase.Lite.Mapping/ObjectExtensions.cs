@@ -69,7 +69,7 @@ namespace Couchbase.Lite
                     }
 
                     AddDictionaryValue(ref dictionary, propertyName, propertyValue, propertyInfo.PropertyType, propertyNameConverter);
-                };
+                }
             }
 
             return dictionary;
@@ -84,6 +84,10 @@ namespace Couchbase.Lite
             if (propertyType == typeof(byte[]) || propertyType == typeof(Stream))
             {
                 dictionary[propertyName] = new Blob(string.Empty, (byte[])propertyValue);
+            }
+            else if (propertyType == typeof(DateTime))
+            {
+                dictionary[propertyName] = new DateTimeOffset((DateTime)propertyValue);
             }
             else if (!propertyType.IsSimple() && !propertyType.IsEnum && propertyType.IsClass && propertyValue != null)
             {
