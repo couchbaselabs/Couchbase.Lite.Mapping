@@ -22,6 +22,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)PropertyNameConversionTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TestObjects\SimpleObjectWithDateTime.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SimpleObjectWithDateTimeTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SimpleEnumTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TestObjects\SimpleEnum.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TestObjects\SimpleObjectWithEnum.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JsonPropertyAttributeTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TestObjects\SimpleObjectWithJsonPropertyAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)TestObjects\" />

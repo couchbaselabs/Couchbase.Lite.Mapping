@@ -67,6 +67,23 @@ namespace Couchbase.Lite.Mapping.Tests
 
             Assert.True(result, "Property Name is not getting converted correctly.");
         }
+
+        [Fact]
+        public void TestEnumToMutableDocument()
+        {
+            var simpleObject = new SimpleObjectWithEnum
+            {
+                SimpleEnum = SimpleEnum.Enum_2
+            };
+
+            var mutableDocument = simpleObject.ToMutableDocument();
+
+            var result = mutableDocument.Keys.Contains("SimpleEnum");
+            var enumValue = mutableDocument.GetString("SimpleEnum");
+
+            Assert.True(result, "Property Name is not getting converted correctly.");
+            Assert.Equal("EnumValue_2", enumValue);
+        }
     }
 
     public class CustomPropertyNameConverter : IPropertyNameConverter
