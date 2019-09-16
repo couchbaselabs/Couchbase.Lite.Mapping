@@ -1,4 +1,6 @@
-﻿namespace Couchbase.Lite.Mapping.Tests.TestObjects
+﻿using System.Runtime.Serialization;
+
+namespace Couchbase.Lite.Mapping.Tests.TestObjects
 {
     public class SimpleObject
     {
