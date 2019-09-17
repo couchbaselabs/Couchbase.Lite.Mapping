@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Serialization;
 using Couchbase.Lite.Mapping;
+using Newtonsoft.Json;
 
 namespace Couchbase.Lite
 {
@@ -52,12 +54,26 @@ namespace Couchbase.Lite
                 var propertyValue = propertyInfo.GetValue(obj);
                 var propertyType = propertyInfo.PropertyType;
 
+                if (propertyType.IsEnum)
+                {
+                    var attribute = propertyInfo.PropertyType.GetMember(propertyValue.ToString()).FirstOrDefault()?.GetCustomAttribute<EnumMemberAttribute>();
+                    if (attribute != null)
+                    {
+                        propertyValue = attribute.Value;
+                    }
+                }
+
                 if (!propertyValue.IsNullOrDefault(propertyType))
                 {
                     if (propertyInfo.CustomAttributes?.Count() > 0 && 
                         propertyInfo.GetCustomAttribute(typeof(MappingPropertyName)) is MappingPropertyName mappingProperty)
                     {
                         propertyName = mappingProperty.Name;
+                    }
+                    else if (propertyInfo.CustomAttributes?.Count() > 0 &&
+                        propertyInfo.GetCustomAttribute(typeof(JsonPropertyAttribute)) is JsonPropertyAttribute jsonProperty)
+                    {
+                        propertyName = jsonProperty.PropertyName;
                     }
                     else if (propertyNameConverter != null)
                     {
