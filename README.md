@@ -4,18 +4,17 @@
 
 `Couchbase.Lite.Mapping` gives developers the ability to dynamically automatically convert generic objects to/from Couchbase `Document` objects and lists of `Result` objects. This drastically reduces the amount of, often repeated, code needed to be written to store and retrieve information to and from Couchbase Lite databases.
 
-[![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/couchbaselabs/Couchbase.Lite.Mapping)
-
 # Table of Contents
 1. [Getting Started](#gettingstarted)
 2. [Building the Project (optional)](#build)
 3. [Basic Usage: Object/Document](#basicusage1)
-4. [Basic Usage: IResultSet to IEnumerable of Object](#basicusage2)
-5. [Customizing Property Name Serialization](#custom-property-serialization)
+4. [Basic Usage: IResultSet to Object(s)](#basicusage2)
+5. [Advanced Usage: IResultSet to Object(s)](#advusage)
+6. [Customizing Property Name Serialization](#custom-property-serialization)
     1. [Globally](#custom-property-serialization-global)
     2. [By Document](#custom-property-serialization-document)
     3. [By Property](#custom-property-serialization-property)
-6. [Testing](#testing)
+7. [Testing](#testing)
 
 ### Getting Started <a name="gettingstarted"></a>
 
@@ -71,7 +70,7 @@ var mutableDocument = person.ToMutableDocument();
 var newPerson = mutableDocument.ToObject<Person>();
 ```
 
-### Basic Usage: IResultSet to IEnumerable of Object <a name="basicusage2"></a>
+### Basic Usage: IResultSet to Object(s) <a name="basicusage2"></a>
 
 #### Default (old) approach
 ```csharp
@@ -111,9 +110,36 @@ var query = QueryBuilder.Select(SelectResult.All())
 
 var results = query?.Execute()?.AllResults();
 
-// Where 'people' is the containing Dictionary key (see in default approach above)
-var personList = results?.ToObjects<Person>("people"); 
+// Map all of the results to a list of objects
+var personList = results?.ToObjects<Person>(); 
 
+// OR map a single result item to an object
+var person = results?[0].ToObject<Person>();
+
+```
+
+### Advanced Usage: IResultSet to Object(s)<a name="basicusage2"></a>
+
+You can also map more complex queries:
+
+```csharp
+public class PersonStats
+{ 
+    public int Count { get; set; }
+    public string Type { get; set; }
+}
+
+var query = QueryBuilder.Select(
+                        SelectResult.Expression(Function.Count(Expression.All())).As("count"),
+                        SelectResult.Property("type"))
+                       .From(DataSource.Database(Database))
+                       .Where(Expression.Property("type").NotNullOrMissing())
+                       .GroupBy(Expression.Property("type"))
+                       .OrderBy(Ordering.Property("type").Ascending());
+
+var results = query?.Execute()?.AllResults();
+
+var personList = results?[0].ToObjects<PersonStats>(); 
 ```
 
 ### Customizing Property Name Serialization <a name="custom-property-serialization"></a>
