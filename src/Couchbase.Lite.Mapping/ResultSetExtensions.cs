@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Couchbase.Lite.Mapping;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -7,7 +8,7 @@ namespace Couchbase.Lite
 {
     public static class ResultSetExtensions
     {
-        public static T ToObject<T>(this Query.Result result) where T : new()
+        public static T ToObject<T>(this Query.Result result)
         {
             T obj = default;
 
@@ -19,8 +20,6 @@ namespace Couchbase.Lite
                 };
 
                 settings.Converters?.Add(new BlobToBytesJsonConverter());
-
-                obj = new T();
 
                 JObject rootJObj = new JObject();
 
@@ -44,9 +43,9 @@ namespace Couchbase.Lite
                         else
                         {
                             jObj = new JObject
-                        {
-                            new JProperty(key, value)
-                        };
+                            {
+                                new JProperty(key, value)
+                            };
                         }
 
                         if (jObj != null)
@@ -69,7 +68,7 @@ namespace Couchbase.Lite
             return obj;
         }
 
-        public static IEnumerable<T> ToObjects<T>(this List<Query.Result> results) where T : new()
+        public static IEnumerable<T> ToObjects<T>(this List<Query.Result> results)
         {
             List<T> objects = default;
 
