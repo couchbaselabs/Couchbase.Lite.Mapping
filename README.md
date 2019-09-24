@@ -48,6 +48,8 @@ To get started using [Couchbase.Lite](https://github.com/couchbase/couchbase-lit
 
 
 ### Basic Usage: Object/Document <a name="basicusage1"></a>
+
+Create a new document with a new object.
 ```csharp
 // An object to be converted to a document
 public class Person
@@ -64,11 +66,20 @@ var person = new Person
 };
 
 // Convert the object into a Couchbase.Lite MutableDocument
-var mutableDocument = person.ToMutableDocument();
+var newMutableDocument = person.ToMutableDocument();
 
 // Convert a Couchbase.Lite MutableDocument into an object (of a type specified via generic)
-var newPerson = mutableDocument.ToObject<Person>();
+var newPerson = newMutableDocument.ToObject<Person>();
 ```
+
+Modify an existing document.
+```csharp
+// You can provide the document ID to the ToMutableDocument extension method
+// Where "person" is a previously retrieved (and mapped) document, and "id" is a known document ID.
+var existingMutableDocument = person.ToMutableDocument($"person::{id}"); 
+```
+
+**Note:** The `ToMutableDocument` extension method also 
 
 ### Basic Usage: IResultSet to Object(s) <a name="basicusage2"></a>
 
