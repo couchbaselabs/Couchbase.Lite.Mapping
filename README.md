@@ -118,7 +118,7 @@ var person = results?[0].ToObject<Person>();
 
 ```
 
-### Advanced Usage: IResultSet to Object(s)<a name="basicusage2"></a>
+### Advanced Usage: IResultSet to Object(s)<a name="advusage"></a>
 
 You can also map more complex queries:
 
@@ -139,7 +139,7 @@ var query = QueryBuilder.Select(
 
 var results = query?.Execute()?.AllResults();
 
-var personList = results?[0].ToObjects<PersonStats>(); 
+var personStats = results?[0].ToObjects<PersonStats>(); 
 ```
 
 ### Customizing Property Name Serialization <a name="custom-property-serialization"></a>
