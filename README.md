@@ -131,8 +131,28 @@ var person = results?[0].ToObject<Person>();
 
 ### Advanced Usage: IResultSet to Object(s)<a name="advusage"></a>
 
-You can also map more complex queries:
+You can also map more complex queriies. 
 
+Returning Meta ID (and any other valid column)
+```csharp
+public class Person
+{ 
+    public string Type => "person";
+    public string Id { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+}
+
+var query = QueryBuilder.Select(SelectResult.Expression(Meta.ID), SelectResult.All())
+            .From(DataSource.Database(Database))
+            .Where(Expression.Property("type").EqualTo(Expression.String("person")));
+
+var results = query?.Execute()?.AllResults();
+
+var people = results?.ToObjects<Person>();
+```
+
+Data aggregation
 ```csharp
 public class PersonStats
 { 
