@@ -47,7 +47,9 @@ namespace Couchbase.Lite
         {
             var dictionary = new Dictionary<string, object>();
 
-            foreach (PropertyInfo propertyInfo in obj.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance))
+            var properties = obj.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance).Where(pi => !Attribute.IsDefined(pi, typeof(JsonIgnoreAttribute))).ToList();
+
+            foreach (PropertyInfo propertyInfo in properties)
             {
                 string propertyName;
 
