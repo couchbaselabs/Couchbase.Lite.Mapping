@@ -65,7 +65,7 @@ namespace Couchbase.Lite
                     }
                 }
 
-                if (!propertyValue.IsNullOrDefault(propertyType))
+                if (propertyValue != null)
                 {
                     if (propertyInfo.CustomAttributes?.Count() > 0 && 
                         propertyInfo.GetCustomAttribute(typeof(MappingPropertyName)) is MappingPropertyName mappingProperty)
@@ -103,7 +103,7 @@ namespace Couchbase.Lite
             {
                 dictionary[propertyName] = new Blob(string.Empty, (byte[])propertyValue);
             }
-            else if (propertyType == typeof(DateTime))
+            else if (propertyType == typeof(DateTime) || propertyType == typeof(DateTime?))
             {
                 dictionary[propertyName] = new DateTimeOffset((DateTime)propertyValue);
             }
@@ -144,22 +144,6 @@ namespace Couchbase.Lite
             {
                 dictionary[propertyName] = propertyValue;
             }
-        }
-
-        internal static bool IsNullOrDefault(this object obj, Type runtimeType)
-        {
-            if (obj == null) return true;
-
-            // Handle non-null reference types.
-            if (!runtimeType.IsValueType) return false;
-
-            // Nullable, but not null
-            if (Nullable.GetUnderlyingType(runtimeType) != null) return false;
-
-            // Use CreateInstance as the most reliable way to get default value for a value type
-            object defaultValue = Activator.CreateInstance(runtimeType);
-
-            return defaultValue.Equals(obj);
         }
 
         static bool IsSimple(this Type type) => (type.IsValueType || type == typeof(string));
