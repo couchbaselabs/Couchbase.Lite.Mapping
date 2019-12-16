@@ -103,9 +103,11 @@ namespace Couchbase.Lite
             {
                 dictionary[propertyName] = new Blob(string.Empty, (byte[])propertyValue);
             }
-            else if (propertyType == typeof(DateTime) || propertyType == typeof(DateTime?))
-            {
-                dictionary[propertyName] = new DateTimeOffset((DateTime)propertyValue);
+            else if (propertyType == typeof(DateTime) || propertyType == typeof(DateTime?)) {
+                var dateTimeVal = ((DateTime) propertyValue);
+                if (dateTimeVal != default(DateTime)) {
+                    dictionary[propertyName] = new DateTimeOffset((DateTime) propertyValue);
+                }
             }
             else if (!propertyType.IsSimple() && !propertyType.IsEnum && propertyType.IsClass && propertyValue != null)
             {
