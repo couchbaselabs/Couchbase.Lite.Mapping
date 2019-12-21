@@ -14,7 +14,12 @@
     <tags>couchbase couchbase-mobile couchbase-lite sync database mobile netcore xamarin ios android windows linux mac osx nosql</tags>
     <language>en-US</language>
     <license type="expression">Apache-2.0</license>
-    <releaseNotes>Fixed bugs #10 and #12 - added JsonIgnore capability, support for nullable DateTime type, and removed constraint on default data type value mapping.</releaseNotes>
+    <releaseNotes>
+    Fixed the following issues
+    #10 - Properties with JsonIgnore attribute are saved to Couchbase Lite database
+    #12 - Cannot save DateTime property
+    #21 - DateTime serialization fails at lower end
+    </releaseNotes>
   </metadata>
   <files>
     <file target="lib\netstandard2.0\" src="..\..\bin\Release\netstandard2.0\Couchbase.Lite.Mapping.dll" />
