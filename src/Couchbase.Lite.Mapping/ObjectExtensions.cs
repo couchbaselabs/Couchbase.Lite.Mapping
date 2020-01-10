@@ -105,7 +105,11 @@ namespace Couchbase.Lite
             }
             else if (propertyType == typeof(DateTime) || propertyType == typeof(DateTime?))
             {
-                dictionary[propertyName] = new DateTimeOffset((DateTime)propertyValue);
+                DateTime dateTimePropertyValue = (DateTime)propertyValue;
+                DateTimeOffset dateTimeOffset = dateTimePropertyValue.ToUniversalTime() <= DateTimeOffset.MinValue.UtcDateTime
+                                                ? DateTimeOffset.MinValue
+                                                : new DateTimeOffset(dateTimePropertyValue);
+                dictionary[propertyName] = dateTimeOffset;
             }
             else if (!propertyType.IsSimple() && !propertyType.IsEnum && propertyType.IsClass && propertyValue != null)
             {

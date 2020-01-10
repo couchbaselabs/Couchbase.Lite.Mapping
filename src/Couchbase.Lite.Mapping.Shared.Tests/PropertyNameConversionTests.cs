@@ -14,6 +14,8 @@ namespace Couchbase.Lite.Mapping.Tests
                 StringValue = "Test Value"
             };
 
+            Settings.PropertyNameConverter = null;
+
             var mutableDocument = simpleObject.ToMutableDocument();
 
             var result = mutableDocument?.Keys.Contains("stringValue");
