@@ -56,18 +56,9 @@ namespace Couchbase.Lite
                 var propertyValue = propertyInfo.GetValue(obj);
                 var propertyType = propertyInfo.PropertyType;
 
-                if (propertyType.IsEnum)
-                {
-                    var attribute = propertyInfo.PropertyType.GetMember(propertyValue.ToString()).FirstOrDefault()?.GetCustomAttribute<EnumMemberAttribute>();
-                    if (attribute != null)
-                    {
-                        propertyValue = attribute.Value;
-                    }
-                }
-
                 if (propertyValue != null)
                 {
-                    if (propertyInfo.CustomAttributes?.Count() > 0 && 
+                    if (propertyInfo.CustomAttributes?.Count() > 0 &&
                         propertyInfo.GetCustomAttribute(typeof(MappingPropertyName)) is MappingPropertyName mappingProperty)
                     {
                         propertyName = mappingProperty.Name;
@@ -111,8 +102,28 @@ namespace Couchbase.Lite
             {
                 if (typeof(IEnumerable).IsAssignableFrom(propertyType))
                 {
-                    if (propertyType.IsArray && propertyType.GetElementType().IsSimple()
-                         || (!propertyType.IsArray && propertyValue is IList 
+                    if (propertyType.IsArray && propertyType.GetElementType().IsEnum
+                         || (!propertyType.IsArray && propertyValue is IList
+                             && propertyValue.GetType().GetTypeInfo().GenericTypeArguments[0].IsEnum))
+                    {
+                        Type enumType = propertyType.IsArray ?
+                                            propertyType.GetElementType() :
+                                            propertyValue.GetType().GetTypeInfo().GenericTypeArguments[0];
+
+                        var propertyValueEnumList = new List<string>();
+                        foreach (object @object in propertyValue as IEnumerable)
+                        {
+                            EnumMemberAttribute itemAttribute = enumType.GetMember(@object.ToString()).FirstOrDefault()?.GetCustomAttribute<EnumMemberAttribute>();
+                            if (itemAttribute != null)
+                            {
+                                propertyValueEnumList.Add(itemAttribute.Value);
+                            }
+                        }
+                        dictionary[propertyName] = propertyValueEnumList;
+                    }
+
+                    else if (propertyType.IsArray && propertyType.GetElementType().IsSimple()
+                         || (!propertyType.IsArray && propertyValue is IList
                              && propertyValue.GetType().GetTypeInfo().GenericTypeArguments[0].IsSimple()))
                     {
                         dictionary[propertyName] = propertyValue;
@@ -138,6 +149,11 @@ namespace Couchbase.Lite
             }
             else if (propertyType.IsEnum)
             {
+                var attribute = propertyType.GetMember(propertyValue.ToString()).FirstOrDefault()?.GetCustomAttribute<EnumMemberAttribute>();
+                if (attribute != null)
+                {
+                    propertyValue = attribute.Value;
+                }
                 dictionary[propertyName] = propertyValue.ToString();
             }
             else

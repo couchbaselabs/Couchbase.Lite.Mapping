@@ -1,6 +1,7 @@
 ﻿using System;
 using Xunit;
 using Couchbase.Lite.Mapping.Tests.TestObjects;
+using System.Collections.Generic;
 
 namespace Couchbase.Lite.Mapping.Tests
 {
@@ -83,6 +84,46 @@ namespace Couchbase.Lite.Mapping.Tests
 
             Assert.True(result, "Property Name is not getting converted correctly.");
             Assert.Equal("EnumValue_2", enumValue);
+        }
+
+        [Fact]
+        public void TestArrayEnumToMutableDocument()
+        {
+            var simpleObject = new SimpleObjectWithEnumerableEnum
+            {
+                ArraySimpleEnums = new[] { SimpleEnum.Enum_1, SimpleEnum.Enum_2 }
+            };
+
+            var mutableDocument = simpleObject.ToMutableDocument();
+
+            var result = mutableDocument.Keys.Contains("ArraySimpleEnums");
+            var enums = mutableDocument.GetArray("ArraySimpleEnums");
+            var enumValue1 = enums.GetString(0);
+            var enumValue2 = enums.GetString(1);
+
+            Assert.True(result, "Property Name is not getting converted correctly.");
+            Assert.Equal("EnumValue_1", enumValue1);
+            Assert.Equal("EnumValue_2", enumValue2);
+        }
+
+        [Fact]
+        public void TestListEnumToMutableDocument()
+        {
+            var simpleObject = new SimpleObjectWithEnumerableEnum
+            {
+                ListSimpleEnums = new List<SimpleEnum> { SimpleEnum.Enum_2, SimpleEnum.Enum_3 }
+            };
+
+            var mutableDocument = simpleObject.ToMutableDocument();
+
+            var result = mutableDocument.Keys.Contains("ListSimpleEnums");
+            var enums = mutableDocument.GetArray("ListSimpleEnums");
+            var enumValue1 = enums.GetString(0);
+            var enumValue2 = enums.GetString(1);
+
+            Assert.True(result, "Property Name is not getting converted correctly.");
+            Assert.Equal("EnumValue_2", enumValue1);
+            Assert.Equal("EnumValue_3", enumValue2);
         }
     }
 

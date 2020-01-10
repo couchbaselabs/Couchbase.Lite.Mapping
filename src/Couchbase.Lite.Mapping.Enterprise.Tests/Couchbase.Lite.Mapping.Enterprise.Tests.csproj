@@ -17,5 +17,8 @@
   <ItemGroup>
     <ProjectReference Include="..\Couchbase.Lite.Mapping\Couchbase.Lite.Mapping.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="SimpleObjectWithArrayEnum.cs" />
+  </ItemGroup>
   <Import Project="..\Couchbase.Lite.Mapping.Shared.Tests\Couchbase.Lite.Mapping.Shared.Tests.projitems" Label="Shared" Condition="Exists('..\Couchbase.Lite.Mapping.Shared.Tests\Couchbase.Lite.Mapping.Shared.Tests.projitems')" />
 </Project>
