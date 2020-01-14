@@ -27,6 +27,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)TestObjects\SimpleObjectWithEnum.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JsonPropertyAttributeTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TestObjects\SimpleObjectWithJsonPropertyAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TestObjects\SimpleObjectWithEnumerableEnum.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)TestObjects\" />
