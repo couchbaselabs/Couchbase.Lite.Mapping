@@ -87,7 +87,7 @@ namespace Couchbase.Lite
                 {
                     var obj = ToObject<T>(result);
 
-                    if (obj != default)
+                    if (!EqualityComparer<T>.Default.Equals(obj, default(T)))                   
                     {
                         objects.Add(obj);
                     }
