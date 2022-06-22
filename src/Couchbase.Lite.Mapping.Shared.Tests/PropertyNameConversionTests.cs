@@ -35,6 +35,8 @@ namespace Couchbase.Lite.Mapping.Tests
 
             var result = mutableDocument?.Keys.Contains("StringValue?");
 
+            Settings.PropertyNameConverter = null;//Clean global setting
+
             Assert.True(result, "Property Name is not getting converted correctly.");
         }
 
