@@ -1,15 +1,21 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Couchbase.Lite.Mapping.Tests", "Couchbase.Lite.Mapping.Tests\Couchbase.Lite.Mapping.Tests.csproj", "{013D6EAD-1B2F-4523-9D60-237F7CB0CBD8}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32602.201
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Couchbase.Lite.Mapping.Tests", "Couchbase.Lite.Mapping.Tests\Couchbase.Lite.Mapping.Tests.csproj", "{013D6EAD-1B2F-4523-9D60-237F7CB0CBD8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Couchbase.Lite.Mapping", "Couchbase.Lite.Mapping\Couchbase.Lite.Mapping.csproj", "{E43895B7-8BAC-47E9-B7BC-AFB728460EC7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Couchbase.Lite.Mapping", "Couchbase.Lite.Mapping\Couchbase.Lite.Mapping.csproj", "{E43895B7-8BAC-47E9-B7BC-AFB728460EC7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Couchbase.Lite.Mapping.Enterprise.Tests", "Couchbase.Lite.Mapping.Enterprise.Tests\Couchbase.Lite.Mapping.Enterprise.Tests.csproj", "{8935D216-8FE7-4511-8294-2C80A90E2BF3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Couchbase.Lite.Mapping.Enterprise.Tests", "Couchbase.Lite.Mapping.Enterprise.Tests\Couchbase.Lite.Mapping.Enterprise.Tests.csproj", "{8935D216-8FE7-4511-8294-2C80A90E2BF3}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Couchbase.Lite.Mapping.Shared.Tests", "Couchbase.Lite.Mapping.Shared.Tests\Couchbase.Lite.Mapping.Shared.Tests.shproj", "{99C6DC62-E1CE-43DE-983B-5DDA6EC8E680}"
 EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Couchbase.Lite.Mapping.Shared.Tests\Couchbase.Lite.Mapping.Shared.Tests.projitems*{013d6ead-1b2f-4523-9d60-237f7cb0cbd8}*SharedItemsImports = 5
+		Couchbase.Lite.Mapping.Shared.Tests\Couchbase.Lite.Mapping.Shared.Tests.projitems*{8935d216-8fe7-4511-8294-2c80a90e2bf3}*SharedItemsImports = 5
+		Couchbase.Lite.Mapping.Shared.Tests\Couchbase.Lite.Mapping.Shared.Tests.projitems*{99c6dc62-e1ce-43de-983b-5dda6ec8e680}*SharedItemsImports = 13
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -27,5 +33,11 @@ Global
 		{8935D216-8FE7-4511-8294-2C80A90E2BF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8935D216-8FE7-4511-8294-2C80A90E2BF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8935D216-8FE7-4511-8294-2C80A90E2BF3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4DD33AE6-ABBD-434B-9ECB-4393CDE88DBA}
 	EndGlobalSection
 EndGlobal
