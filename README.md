@@ -1,4 +1,4 @@
-**This is an independent, open source couchbaselabs project, and is NOT officially supported by Couchbase, Inc.  Issues are not monitored, but if you post a question on the [forums](https://www.couchbase.com/forums/) you might get an answer.**
+**This is an independent, open source couchbaselabs project, and is NOT officially supported by Couchbase, Inc.  Issues are disabled, but if you post a question on the [forums](https://www.couchbase.com/forums/) you might get an answer.**
 
 # Couchbase.Lite.Mapping
 
